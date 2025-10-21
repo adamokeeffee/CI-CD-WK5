@@ -24,7 +24,7 @@ public class PassengerController {
         return ResponseEntity.ok(service.findAll());
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     public ResponseEntity<Passenger> getOne(@PathVariable String id){
         Optional<Passenger> maybe = service.findById(id);
         if(maybe.isPresent()){

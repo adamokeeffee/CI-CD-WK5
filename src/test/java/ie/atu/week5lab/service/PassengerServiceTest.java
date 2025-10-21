@@ -48,5 +48,33 @@ class PassengerServiceTest{
                     .build()));
     }
 
+    @Test
+    void update_success() {
+        Passenger p = new Passenger("1", "joey", "joey@atu,ie");
+        service.create(p);
+
+        Passenger updated = new Passenger("1", "joe", "joe@atu.ie");
+        assertTrue(service.update("1", updated).isPresent());
+    }
+
+    @Test
+    void update_notFound() {
+        Passenger updated = new Passenger("99", "P", "person@atu.ie");
+        assertTrue(service.update("99", updated).isEmpty());
+    }
+
+    @Test
+    void delete_success() {
+        Passenger p = new Passenger("1", "Delete", "delete@atu.ie");
+        service.create(p);
+
+        assertTrue(service.delete("1"));
+    }
+
+    @Test
+    void delete_notFound() {
+        assertFalse(service.delete("99"));
+    }
+
 
 }
