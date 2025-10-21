@@ -29,4 +29,24 @@ public class PassengerService {
         store.add(p);
         return p;
     }
+
+    public Optional<Passenger> update(String id, Passenger updated) {
+        for (int i = 0; i < store.size(); i++) {
+            Passenger existing = store.get(i);
+            if (existing.getPassengerId().equals(id)) {
+                existing.setName(updated.getName());
+                existing.setEmail(updated.getEmail());
+                return Optional.of(existing);
+            }
+        }
+        return Optional.empty();
+    }
+
+    public boolean delete(String id) {
+        return store.removeIf(p -> p.getPassengerId().equals(id));
+    }
+
 }
+
+
+
